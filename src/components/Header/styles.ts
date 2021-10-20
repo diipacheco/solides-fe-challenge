@@ -22,4 +22,14 @@ export const Container = styled.header`
     font-size: 14px;
     cursor: pointer;
   }
+
+  @media screen and (min-width: 768px) {
+    > h1 {
+      font-size: 20px;
+    }
+
+    > button {
+      font-size: 18px;
+    }
+  }
 `;

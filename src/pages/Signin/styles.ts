@@ -46,5 +46,9 @@ export const Content = styled.div`
         margin-right: 05px;
       }
     }
+
+    @media (min-width: 768px) {
+      width: 30%;
+    }
   }
 `;

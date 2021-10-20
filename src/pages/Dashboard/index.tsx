@@ -1,8 +1,9 @@
 import React, { useMemo, useRef, useCallback } from 'react';
 import { format } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import pt from 'date-fns/locale/pt-BR';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
@@ -41,7 +42,7 @@ const Dashboard: React.FC = () => {
         const parsedLunchName = new Date(`${dateNow} ${lunch_time}`);
         const exitLunchTime = new Date(`${dateNow} ${exit_time}`);
 
-        const response = await api.post(
+        await api.post(
           '/appointments',
           {
             date: format(new Date(Date.now()), `yyyy-MM-dd HH:mm:ss`),
@@ -55,8 +56,6 @@ const Dashboard: React.FC = () => {
             },
           },
         );
-
-        console.log(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -91,6 +90,8 @@ const Dashboard: React.FC = () => {
           </InputContainer>
 
           <Button type="submit">Submeter horas</Button>
+
+          <Link to="/appointments">Ver histórico de apontamentos</Link>
         </Form>
       </Content>
     </Container>

@@ -6,6 +6,9 @@ export const Container = styled.main`
 
   width: 100vw;
   height: 100vh;
+  @media screen and (min-width: 768px) {
+    align-items: center;
+  }
 `;
 
 export const Content = styled.section`
@@ -31,12 +34,44 @@ export const Content = styled.section`
   > form {
     display: flex;
     flex-direction: column;
+    text-align: center;
+    width: 100%;
 
     margin-top: 50px;
+
+    > a {
+      color: #ffff;
+      margin-top: 45px;
+      transition: 1s ease;
+      :hover {
+        color: #a8b7bdcc;
+      }
+    }
   }
 
   div + div {
     margin-top: 25px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    align-items: center;
+    max-width: 520px;
+
+    > h1 {
+      font-size: 36px;
+    }
+
+    > p {
+      font-size: 16px;
+      > br {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    align-items: center;
+    width: 60%;
   }
 `;
 
