@@ -8,8 +8,9 @@ import * as Yup from 'yup';
 import getValidationErros from '../../utils/getValidationErros';
 
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-import { Container, Content, Button } from './styles';
+import { Container, Content } from './styles';
 import api from '../../services/api';
 
 interface SignupFormData {

@@ -9,8 +9,9 @@ import { useAuth } from '../../hooks/auth';
 import getValidationErros from '../../utils/getValidationErros';
 
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
-import { Container, Content, Button } from './styles';
+import { Container, Content } from './styles';
 
 interface ISigninFormData {
   email: string;
