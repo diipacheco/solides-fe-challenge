@@ -30,6 +30,8 @@
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off",
+    "no-return-assign": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

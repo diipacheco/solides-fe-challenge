@@ -1,51 +1,48 @@
 import React, { useRef, useCallback } from 'react';
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { FiMail, FiLock, FiArrowLeft, FiUser } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
-import { useAuth } from '../../hooks/auth';
 import getValidationErros from '../../utils/getValidationErros';
 
 import Input from '../../components/Input';
 
 import { Container, Content, Button } from './styles';
+import api from '../../services/api';
 
-interface ISigninFormData {
+interface SignupFormData {
+  name: string;
   email: string;
   password: string;
 }
 
-const Signin: React.FC = () => {
+const Singup: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-
-  const { signIn } = useAuth();
 
   const history = useHistory();
 
   const handleSubmit = useCallback(
-    async (data: ISigninFormData) => {
+    async (data: SignupFormData) => {
       try {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
+          name: Yup.string().required('Nome obrigatório'),
           email: Yup.string()
             .required('E-mail obrigatório')
             .email('Digite um e-mail válido'),
-          password: Yup.string().min(6, 'Senha obrigatória'),
+          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        await signIn({
-          email: data.email,
-          password: data.password,
-        });
+        await api.post('/users', data);
 
-        history.push('/dashboard');
+        history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErros(err);
@@ -54,15 +51,17 @@ const Signin: React.FC = () => {
         }
       }
     },
-    [signIn, history],
+    [history],
   );
 
   return (
     <Container>
       <Content>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Login</h1>
-          <Input icon={FiMail} name="email" type="email" placeholder="E-mail" />
+          <h1>Faça seu cadastro</h1>
+
+          <Input icon={FiUser} name="name" placeholder="Nome" />
+          <Input icon={FiMail} name="email" placeholder="E-mail" />
           <Input
             icon={FiLock}
             name="password"
@@ -70,11 +69,11 @@ const Signin: React.FC = () => {
             placeholder="Senha"
           />
 
-          <Button type="submit">Login</Button>
+          <Button type="submit">Cadastrar</Button>
 
-          <Link to="/signup">
-            <FiLogIn />
-            Criar conta
+          <Link to="/">
+            <FiArrowLeft />
+            Voltar para Logon
           </Link>
         </Form>
       </Content>
@@ -82,4 +81,4 @@ const Signin: React.FC = () => {
   );
 };
 
-export default Signin;
+export default Singup;

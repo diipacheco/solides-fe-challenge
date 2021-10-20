@@ -22,10 +22,6 @@ export default createGlobalStyle`
   }
 
   html {
-    background: var(--background);
-  }
-
-  :root {
-    --background: #151718;
+    background: #151718
   }
 `;
